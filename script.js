@@ -10,13 +10,12 @@
   var BodyView = Backbone.View.extend({
     tagName: 'li',
     className: "list-group-item list-group-item-warning",
-    template: _.template('<p><%= line %></p>'),
     render: function () {
       var bodyLines = _.escape(this.model.attributes.body).split('\n');
 
       this.$el.append(
         bodyLines.map( function(line) {
-          return _.template('<p><%= line %></p>')({line: line})
+          return _.template('<span><%= line %></span><br>')({line: line})
         })
       );
 

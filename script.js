@@ -10,8 +10,11 @@
   var BodyView = Backbone.View.extend({
     tagName: 'li',
     className: "list-group-item list-group-item-warning",
+    initialize: function (options) {
+      this.bodyText = options.bodyText
+    },
     render: function () {
-      var bodyLines = _.escape(this.model.attributes.body).split('\n');
+      var bodyLines = _.escape(this.bodyText).split('\n');
 
       this.$el.append(
         bodyLines.map( function(line) {
@@ -30,7 +33,7 @@
     render: function () {
       this.$el.html( this.template(this.model.attributes) );
 
-      var bodyView = new BodyView({model: this.model});
+      var bodyView = new BodyView({bodyText: this.model.attributes.body});
       this.$('ul').append( bodyView.render().el );
 
       return this;

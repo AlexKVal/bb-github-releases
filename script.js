@@ -8,8 +8,6 @@
   })
 
   var BodyView = Backbone.View.extend({
-    tagName: 'li',
-    className: "list-group-item list-group-item-warning",
     initialize: function (options) {
       this.bodyText = options.bodyText
     },
@@ -33,8 +31,10 @@
     render: function () {
       this.$el.html( this.template(this.model.attributes) );
 
-      var bodyView = new BodyView({bodyText: this.model.attributes.body});
-      this.$('ul').append( bodyView.render().el );
+      new BodyView({
+        el: this.$('li:last'),
+        bodyText: this.model.attributes.body
+      }).render();
 
       return this;
     }
